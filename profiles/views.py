@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Profile
 from .serializers import ProfileSerializer
-from jokes_main.permissions import IsOwnerOrReadOnly
+from jokes_main.permissions import IsProfileOwnerOrReadOnly
 
 class ProfileList(APIView):
     """
@@ -32,14 +32,14 @@ class ProfileDetail(APIView):
     access to what profile functions
     """
     serializer_class = ProfileSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsProfileOwnerOrReadOnly]
 
     def get_object(self, pk):
         try:
             profile = Profile.objects.get(pk=pk)
             self.check_object_permissions(self.request, profile)
             return profile
-        except:
+        except Profile.DoesNotExist:
             raise Http404
     
 
