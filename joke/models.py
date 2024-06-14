@@ -5,7 +5,6 @@ class Joke(models.Model):
     """
     Joke model
     """
-
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=35)
     content = models.CharField(max_length=500)
