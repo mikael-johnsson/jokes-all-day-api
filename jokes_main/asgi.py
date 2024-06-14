@@ -1,5 +1,5 @@
 """
-ASGI config for jokes project.
+ASGI config for jokes_main project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jokes.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'jokes_main.settings')
 
 application = get_asgi_application()

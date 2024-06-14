@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Profile
 from .serializers import ProfileSerializer
-from jokes.permissions import IsOwnerOrReadOnly
+from jokes_main.permissions import IsOwnerOrReadOnly
 
 class ProfileList(APIView):
     """
