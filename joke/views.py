@@ -1,7 +1,5 @@
-from django.http import Http404
-from rest_framework import status, permissions, generics
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.db.models import Count
+from rest_framework import permissions, generics, filters
 from .models import Joke
 from .serializers import JokeSerializer
 from jokes_main.permissions import IsOwnerOrReadOnly
@@ -12,7 +10,17 @@ class JokeList(generics.ListCreateAPIView):
     """
     serializer_class = JokeSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    queryset = Joke.objects.all()
+    queryset = Joke.objects.annotate(
+        rating_count = Count('rating', distinct=True)
+    ).order_by('-created_at')
+
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+
+    ordering_fields = [
+        'rating_count',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -28,7 +36,8 @@ class JokeDetail(generics.RetrieveUpdateDestroyAPIView):
     # permission_classes tells REST which users have 
     # access to what joke functions
     """
-
     serializer_class = JokeSerializer
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Joke.objects.all()
+    queryset = Joke.objects.annotate(
+        rating_count = Count('rating')
+    ).order_by('-created_at')
