@@ -10,6 +10,7 @@ class IsProfileOwnerOrReadOnly(permissions.BasePermission):
             return True
         return obj.owner == request.user
 
+
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
     Returns true or false based on if the author of the profile
