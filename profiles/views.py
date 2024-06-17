@@ -1,5 +1,6 @@
+from django.db.models import Count, Avg
 from django.http import Http404
-from rest_framework import status, generics
+from rest_framework import status, generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Profile
@@ -10,8 +11,29 @@ class ProfileList(generics.ListAPIView):
     """
     List all profiles
     No create view as profile creation is handled by django signals (in the Profiles model)
+    Annotate allows the user to add fields to filtering
+    distinct makes sure there are no duplicates in the filtering
     """
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        jokes_count = Count('owner__joke', distinct=True),
+        followers_count = Count('owner__followed', distinct=True),
+        following_count = Count('owner__following', distinct=True),
+        given_rating = Avg('owner__rating__rating'),
+        received_rating = Avg('owner__joke__rating__rating')   
+    ).order_by('-created_at')
+
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+
+    ordering_fields = [
+        'jokes_count',
+        'followers_count',
+        'following_count',
+        'received_rating',
+        'given_rating',
+    ]
+
     serializer_class = ProfileSerializer
 
     # def get(self, request):
@@ -35,7 +57,14 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     # access to what profile functions
     """
     permission_classes = [IsProfileOwnerOrReadOnly]
-    queryset = Profile.objects.all()
+    queryset = Profile.objects.annotate(
+        jokes_count = Count('owner__joke', distinct=True),
+        followers_count = Count('owner__followed', distinct=True),
+        following_count = Count('owner__following', distinct=True),
+        given_rating = Avg('owner__rating__rating'),
+        received_rating = Avg('owner__joke__rating__rating')   
+    ).order_by('-created_at')
+
     serializer_class = ProfileSerializer
 
     # def get_object(self, pk):
