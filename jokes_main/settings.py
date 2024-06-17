@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'profiles',
     'joke',
     'rating',
+    'followers',
 ]
 
 MIDDLEWARE = [
