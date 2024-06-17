@@ -11,6 +11,7 @@ class RatingList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
+
 class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     

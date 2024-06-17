@@ -15,5 +15,5 @@ class JokeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Joke
         fields = [
-            'author', 'title', 'content', 'created_at', 'is_owner'
+            'id', 'author', 'title', 'content', 'created_at', 'is_owner'
         ]

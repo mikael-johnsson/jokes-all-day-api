@@ -11,7 +11,7 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = [
-            'author', 'joke', 'created_at', 'rating',
+            'id', 'author', 'joke', 'created_at', 'rating',
         ]
     
     def create(self, validated_data):
