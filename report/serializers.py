@@ -5,10 +5,11 @@ class ReportSerializer(serializers.ModelSerializer):
     """
     """
     author = serializers.ReadOnlyField(source='author.username')
+    joke_title = serializers.ReadOnlyField(source='joke.title')
 
     class Meta:
         model = Report
         fields = [
-            'id', 'author', 'joke', 'content', 'created_at',
-            'handled', 'reason', 
+            'id', 'author', 'joke', 'joke_title', 'reason', 'content', 'created_at',
+            'handled', 
         ]
