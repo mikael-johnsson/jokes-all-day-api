@@ -33,7 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-mikaeljohns-jokesallday-t5n5bhicjfw.ws.codeinstitute-ide.net',
-    '*.herokuapp.com'
+    'jokes-all-day-0142d90d5482.herokuapp.com'
     ]
 
 
