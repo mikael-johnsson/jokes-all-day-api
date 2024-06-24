@@ -19,7 +19,12 @@ class JokeList(generics.ListCreateAPIView):
         filters.OrderingFilter
     ]
 
-    ordering_fields = [
+    filterset_fields = [
+        'author__followed__owner__profile',
+        'author__profile',
+    ]
+
+    ordering_filters = [
         'rating_count',
         'average_rating'
     ]

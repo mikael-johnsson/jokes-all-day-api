@@ -23,7 +23,12 @@ class ProfileList(generics.ListAPIView):
         filters.OrderingFilter
     ]
 
-    ordering_fields = [
+    filterset_fields = [
+        'owner__following__followed__profile',
+        'owner__followed__owner__profile',
+    ]
+
+    ordering_filters = [
         'jokes_count',
         'followers_count',
         'following_count',
