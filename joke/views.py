@@ -29,7 +29,6 @@ class JokeList(generics.ListCreateAPIView):
 
     search_fields = [
         'author__username',
-        'owner__username',
         'title'
     ]
 
