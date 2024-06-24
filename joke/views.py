@@ -16,12 +16,20 @@ class JokeList(generics.ListCreateAPIView):
     ).order_by('-created_at')
 
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        filters.SearchFilter,
+        DjangoFilterBackend,
     ]
 
     filterset_fields = [
         'author__followed__owner__profile',
         'author__profile',
+    ]
+
+    search_fields = [
+        'author__username',
+        'owner__username',
+        'title'
     ]
 
     ordering_filters = [
