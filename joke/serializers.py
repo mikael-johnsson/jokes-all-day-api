@@ -8,8 +8,10 @@ class JokeSerializer(serializers.ModelSerializer):
     """
     author = serializers.ReadOnlyField(source='author.username')
     is_owner = serializers.SerializerMethodField()
+    profile_id = serializers.ReadOnlyField(source='author.profile.id')
     rating_id = serializers.SerializerMethodField()
     rating_count = serializers.ReadOnlyField()
+    average_rating = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -28,5 +30,5 @@ class JokeSerializer(serializers.ModelSerializer):
         model = Joke
         fields = [
             'id', 'author', 'title', 'content', 'created_at',
-            'is_owner', 'rating_id', 'rating_count',
+            'is_owner', 'profile_id', 'rating_id', 'rating_count', 'average_rating'
         ]

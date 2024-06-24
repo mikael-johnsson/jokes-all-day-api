@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Avg
 from rest_framework import permissions, generics, filters
 from .models import Joke
 from .serializers import JokeSerializer
@@ -11,7 +11,8 @@ class JokeList(generics.ListCreateAPIView):
     serializer_class = JokeSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Joke.objects.annotate(
-        rating_count = Count('rating', distinct=True)
+        rating_count = Count('rating', distinct=True),
+        average_rating = Avg('rating__rating')
     ).order_by('-created_at')
 
     filter_backends = [
@@ -20,6 +21,7 @@ class JokeList(generics.ListCreateAPIView):
 
     ordering_fields = [
         'rating_count',
+        'average_rating'
     ]
 
     def perform_create(self, serializer):
@@ -39,5 +41,6 @@ class JokeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = JokeSerializer
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Joke.objects.annotate(
-        rating_count = Count('rating')
+        rating_count = Count('rating'),
+        average_rating = Avg('rating__rating')
     ).order_by('-created_at')
