@@ -13,7 +13,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     following_id = serializers.SerializerMethodField()
     jokes_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
-    followed_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
     given_rating = serializers.ReadOnlyField()
     received_rating = serializers.ReadOnlyField()
 
@@ -35,5 +35,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'created_at', 'name', 'is_owner',
             'following_id', 'jokes_count', 'followers_count',
-            'followed_count', 'given_rating', 'received_rating'
+            'following_count', 'given_rating', 'received_rating'
             ]
