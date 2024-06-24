@@ -1,4 +1,5 @@
 from django.db.models import Count, Avg
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions, generics, filters
 from .models import Joke
 from .serializers import JokeSerializer
