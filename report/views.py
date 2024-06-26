@@ -14,5 +14,5 @@ class ReportList(generics.ListCreateAPIView):
 
 class ReportDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ReportSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Report.objects.all()
