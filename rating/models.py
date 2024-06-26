@@ -16,7 +16,7 @@ class Rating(models.Model):
         Joke, on_delete=models.CASCADE, related_name="rating"
     )
     created_at = models.DateTimeField(auto_now_add=True)
-    rating = models.IntegerField()
+    rating = models.FloatField()
 
     class Meta:
         ordering = ['-created_at']
