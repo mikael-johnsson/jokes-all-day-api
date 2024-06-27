@@ -1,5 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from dj_rest_auth.views import UserDetailsView
+from .serializers import CurrentUserSerializer
 from .settings import (
     JWT_AUTH_COOKIE, JWT_AUTH_REFRESH_COOKIE, JWT_AUTH_SAMESITE,
     JWT_AUTH_SECURE,
@@ -34,3 +36,6 @@ def logout_route(request):
         secure=JWT_AUTH_SECURE,
     )
     return response
+
+class CustomUserDetailsView(UserDetailsView):
+    serializer_class = CurrentUserSerializer
