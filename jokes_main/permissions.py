@@ -20,14 +20,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return obj.author == request.user
-
-class IsOwnerOrAdmin(permissions.BasePermission):
-
-    def has_object_permission(self, request, view, obj):
-        authorized = False
-        if ((obj.owner == request.user) or obj.owner.is_staff):
-            authorized == True
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return authorized
     

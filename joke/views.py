@@ -3,7 +3,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import permissions, generics, filters
 from .models import Joke
 from .serializers import JokeSerializer
-from jokes_main.permissions import IsOwnerOrReadOnly, IsOwnerOrAdmin
+from jokes_main.permissions import IsOwnerOrReadOnly
 
 class JokeList(generics.ListCreateAPIView):
     """
@@ -52,7 +52,7 @@ class JokeDetail(generics.RetrieveUpdateDestroyAPIView):
     # access to what joke functions
     """
     serializer_class = JokeSerializer
-    permission_classes = [IsOwnerOrAdmin]
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Joke.objects.annotate(
         rating_count = Count('rating'),
         average_rating = Avg('rating__rating')
