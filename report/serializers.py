@@ -12,10 +12,10 @@ class ReportSerializer(serializers.ModelSerializer):
         readableName['reason'] = readableName['reason'].replace("_", " ")
         return readableName
     
-    def to_internal_value(self, data):
-        internalName = super().to_representation(data)
-        internalName['reason'] = internalName['reason'].replace(" ", "_")
-        return internalName
+    # def to_internal_value(self, data):
+    #     internalName = super().to_representation(data)
+    #     internalName['reason'] = internalName['reason'].replace(" ", "_")
+    #     return internalName
 
     class Meta:
         model = Report
