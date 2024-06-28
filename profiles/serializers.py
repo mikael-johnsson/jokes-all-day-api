@@ -10,6 +10,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    is_staff = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
     jokes_count = serializers.ReadOnlyField()
     followers_count = serializers.ReadOnlyField()
@@ -20,6 +21,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+    
+    def get_is_staff(self, obj):
+        return obj.owner.is_staff
 
     def get_following_id(self, obj):
         user = self.context['request'].user
@@ -33,7 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = [
-            'id', 'owner', 'created_at', 'name', 'is_owner',
+            'id', 'owner', 'created_at', 'name', 'is_owner', 'is_staff',
             'following_id', 'jokes_count', 'followers_count',
             'following_count', 'given_rating', 'received_rating'
             ]
