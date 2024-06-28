@@ -8,9 +8,14 @@ class ReportSerializer(serializers.ModelSerializer):
     joke_title = serializers.ReadOnlyField(source='joke.title')
 
     def to_representation(self, obj):
-        ret = super().to_representation(obj)
-        ret['reason'] = ret['reason'].replace("_", " ")
-        return ret
+        readableName = super().to_representation(obj)
+        readableName['reason'] = readableName['reason'].replace("_", " ")
+        return readableName
+    
+    def to_internal_value(self, data):
+        internalName = super().to_representation(data)
+        internalName['reason'] = internalName['reason'].replace(" ", "_")
+        return internalName
 
     class Meta:
         model = Report
