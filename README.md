@@ -2,7 +2,9 @@
 This is the Readme for the backend app to the Jokes All Day project.
 
 [Live site](https://jokes-all-day-frontend-26d817bb989c.herokuapp.com)
+
 [API site](https://jokes-all-day-0142d90d5482.herokuapp.com)
+
 [Front end repository](https://github.com/mikael-johnsson/jokes-all-day)
 
 
@@ -85,7 +87,7 @@ In one file, errors appeared. In joke_main's settings.py four of the lines were 
 **AllAuth bug**
 This app is created with Django version 3.11.9. For some reason, the app couldn't find the installed app AllAuth (used for User Authentification), and displayed the error message "No module name 'allauth'. 
 
-The reason was that the workspace terminal continuously ran the "pyenv shell 3.12.2" command and that did not work with the AllAuth library.
+The reason was that the workspace terminal continuously ran the "pyenv shell 3.12.2" command when opened and that did not work with the AllAuth library.
 
 The solution was (during the entire development), to run the following commands before migrating or running server:
 - pyenv install 3.11.9
