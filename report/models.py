@@ -2,16 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from joke.models import Joke
 
+
 class Report(models.Model):
     """
     Report model
     """
     reason_choices = [
         ('choose_an_option', 'Choose an option'),
-        ('racism','Racism'),
-        ('sexism','Sexism'),
-        ('inappropriate','Inappropriate'),
-        ('personal_attack','Personal attack')
+        ('racism', 'Racism'),
+        ('sexism', 'Sexism'),
+        ('inappropriate', 'Inappropriate'),
+        ('personal_attack', 'Personal attack')
     ]
 
     author = models.ForeignKey(
