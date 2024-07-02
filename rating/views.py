@@ -3,6 +3,7 @@ from jokes_main.permissions import IsOwnerOrReadOnly
 from .models import Rating
 from .serializers import RatingSerializer
 
+
 class RatingList(generics.ListCreateAPIView):
     serializer_class = RatingSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -13,9 +14,6 @@ class RatingList(generics.ListCreateAPIView):
 
 
 class RatingDetail(generics.RetrieveUpdateDestroyAPIView):
-    """
-    
-    """
     serializer_class = RatingSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Rating.objects.all()

@@ -6,7 +6,7 @@ from joke.models import Joke
 class Rating(models.Model):
     """
     Rating model
-    Unique together makes sure a user can't 
+    Unique together makes sure a user can't
     rate the same joke more than once
     """
     author = models.ForeignKey(
