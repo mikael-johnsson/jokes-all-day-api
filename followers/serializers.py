@@ -2,6 +2,7 @@ from django.db import IntegrityError
 from rest_framework import serializers
 from .models import Follower
 
+
 class FollowerSerializer(serializers.ModelSerializer):
     """
     Follower serializer
@@ -12,7 +13,7 @@ class FollowerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follower
         fields = [
-            'id','owner', 'followed_name', 'followed', 'created_at'
+            'id', 'owner', 'followed_name', 'followed', 'created_at'
         ]
 
     def perform_create(self, validated_data):
@@ -20,5 +21,5 @@ class FollowerSerializer(serializers.ModelSerializer):
             return super().create(validated_data)
         except IntegrityError:
             raise serializers.ValidationError({
-                'message' : 'possible duplicate'
+                'message': 'possible duplicate'
             })

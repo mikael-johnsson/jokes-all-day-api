@@ -3,6 +3,7 @@ from jokes_main.permissions import IsProfileOwnerOrReadOnly
 from .models import Follower
 from .serializers import FollowerSerializer
 
+
 class FollowerList(generics.ListCreateAPIView):
     """
     List all Followers
@@ -18,7 +19,7 @@ class FollowerList(generics.ListCreateAPIView):
 
 class FollowerDetail(generics.RetrieveDestroyAPIView):
     """
-    Retrieve a follower 
+    Retrieve a follower
     """
     serializer_class = FollowerSerializer
     permission_classes = [IsProfileOwnerOrReadOnly]
