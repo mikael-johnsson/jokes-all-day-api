@@ -2,9 +2,11 @@ from rest_framework import serializers
 from .models import Joke
 from rating.models import Rating
 
+
 class JokeSerializer(serializers.ModelSerializer):
     """
-    get_is_owner validates if the request user is the owner of the Joke (object)
+    get_is_owner validates if the request user is the owner of the
+    Joke (object)
     """
     author = serializers.ReadOnlyField(source='author.username')
     is_owner = serializers.SerializerMethodField()
@@ -30,5 +32,6 @@ class JokeSerializer(serializers.ModelSerializer):
         model = Joke
         fields = [
             'id', 'author', 'title', 'content', 'created_at',
-            'is_owner', 'profile_id', 'rating_id', 'rating_count', 'average_rating'
+            'is_owner', 'profile_id', 'rating_id', 'rating_count',
+            'average_rating'
         ]

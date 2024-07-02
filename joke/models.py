@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Joke(models.Model):
     """
     Joke model
@@ -12,6 +13,6 @@ class Joke(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-    
+
     def __str__(self):
         return f'{self.title} by {self.author}'
