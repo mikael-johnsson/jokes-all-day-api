@@ -29,6 +29,7 @@ DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
     '8000-mikaeljohns-jokesallday-t5n5bhicjfw.ws.codeinstitute-ide.net',
+    'localhost:3000/',
     os.environ.get('ALLOWED_HOST')
     ]
 
